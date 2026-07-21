@@ -13,22 +13,27 @@ document.addEventListener('DOMContentLoaded', () => {
   ---------------------------------------------------------- */
   const preloader = document.getElementById('preloader');
   const preloaderInner = document.getElementById('preloader-inner');
-  const preloaderText = document.getElementById('preloader-text');
-  const preloaderLogo = document.querySelector('#preloader .brand-mark');
   const navbar = document.getElementById('navbar');
-  const navLogo = document.getElementById('nav-logo');
-  const navName = document.getElementById('nav-name');
+  const navBrand = document.getElementById('nav-brand');
 
   function runPreloaderSequence() {
-    // Measure where the nav logo/name will sit
-    const targetRect = navName.getBoundingClientRect();
-    const startRect = preloaderText.getBoundingClientRect();
+    // Measure the SAME kind of box on both ends: the whole logo+name
+    // group, not a mix of inner spans — otherwise the icon's width
+    // throws off the horizontal delta.
+    const targetRect = navBrand.getBoundingClientRect();
+    const startRect = preloaderInner.getBoundingClientRect();
 
-    const scaleY = targetRect.height / startRect.height;
-    const deltaX = (targetRect.left) - startRect.left;
-    const deltaY = (targetRect.top) - startRect.top;
+    // Uniform scale from height (both boxes have the same aspect logic:
+    // icon + gap + text, centered).
+    const scaleFactor = (targetRect.height / startRect.height) * 1.2;
 
-    const tl = gsap.timeline({ delay: 1.6 });
+    // Because transform-origin is 'top left' below, the top-left corner
+    // is the fixed point during scale — so a plain top-to-top /
+    // left-to-left delta lands exactly on target, with no drift.
+    const deltaX = targetRect.left - startRect.left;
+    const deltaY = targetRect.top - startRect.top;
+
+    const tl = gsap.timeline({ delay: 0.5 });
 
     // curtain rises
     tl.to(preloader, {
@@ -37,14 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power4.inOut',
     }, 0);
 
-    // brand text shrinks + travels toward navbar slot while curtain rises
+    // brand block shrinks + travels toward navbar slot while curtain rises.
+    // +window.innerHeight compensates for the parent curtain's own -100% shift,
+    // since this element's translate is measured in the same fixed-viewport space.
     tl.to(preloaderInner, {
-      scale: scaleY,
+      scale: scaleFactor,
       x: deltaX,
       y: deltaY + window.innerHeight,
       duration: 1.1,
       ease: 'power4.inOut',
-      transformOrigin: 'left center',
+      transformOrigin: 'top left',
     }, 0);
 
     tl.to(preloaderInner, { opacity: 0, duration: 0.25 }, 0.85);
@@ -60,42 +67,34 @@ document.addEventListener('DOMContentLoaded', () => {
     tl.add(playHeroReveal, 1.0);
   }
 
-  /* ----------------------------------------------------------
-     2. HERO CONTENT REVEAL
-  ---------------------------------------------------------- */
-  function playHeroReveal() {
-    const heroEls = gsap.utils.toArray('.hero [data-reveal]');
-    gsap.timeline()
-      .to(heroEls, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.12,
-      })
-      .to('.float-chip', {
-        opacity: 1,
-        duration: 1,
-        ease: 'power2.out',
-        stagger: 0.15,
-        onComplete: floatChips,
-      }, '-=0.6');
+
+    /* 2. HERO CONTENT REVEAL */
+ 
+ function playHeroReveal() {
+  const heroEls = gsap.utils.toArray('.hero [data-reveal]');
+
+  gsap.timeline()
+    .to(heroEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.12,
+    })
+    .to('.float-chip', {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.1,
+    }, '-=0.5');
+}
+ 
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(runPreloaderSequence);
+  } else {
+    runPreloaderSequence();
   }
-
-  function floatChips() {
-    document.querySelectorAll('.float-chip').forEach((chip, i) => {
-      gsap.to(chip, {
-        y: i % 2 === 0 ? -14 : 14,
-        duration: 2.6 + i * 0.3,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-    });
-  }
-
-  runPreloaderSequence();
-
   /* ----------------------------------------------------------
      3. SCROLL-TRIGGERED REVEALS (rest of page)
   ---------------------------------------------------------- */

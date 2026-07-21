@@ -39,7 +39,7 @@
 <!-- ============ NAVBAR ============ -->
 <header id="navbar" class="navbar">
   <nav class="nav-shell glass">
-    <a href="#top" class="nav-brand">
+    <a href="#top" class="nav-brand" id="nav-brand">
       <span class="brand-mark" id="nav-logo">
         <svg viewBox="0 0 40 40" width="1em" height="1em" aria-hidden="true">
           <circle cx="20" cy="20" r="17" fill="none" stroke="url(#pg2)" stroke-width="3"/>
@@ -99,37 +99,32 @@
 
       <!-- glowing dome / semicircle, in continuous circular motion -->
       <div class="hero-dome" aria-hidden="true">
-        <span class="dome-sheen"></span>
+        
       </div>
 
       <div class="hero-content">
-        <span class="eyebrow" data-reveal>
-          <span class="dot"></span> AI AUTOMATION · AUTONOMOUS AGENTS
-        </span>
+        
         <h1 class="hero-title" data-reveal>
           Automation that
           <span class="text-gradient">thinks for itself.</span>
         </h1>
         <p class="hero-sub" data-reveal>
-          Autonix designs and deploys AI agents that run your operations end‑to‑end —
+          Autonix designs and deploys AI agents that run your operations end‑to‑end,
           built for agencies who'd rather scale than staff up.
         </p>
-        <div class="hero-actions" data-reveal>
-          <a href="#contact" class="btn btn-light">Book a Demo →</a>
-          <a href="#solution" class="btn btn-glass">
-            <span class="play-dot">▶</span> Watch it work
-          </a>
-        </div>
+        
       </div>
 
-      <!-- floating stat / telemetry cards, reference-style -->
-      <div class="float-chip stat-card chip-1 glass" data-float>
+      <!-- floating stat / telemetry cards, reference-style  -->
+
+       <div class="hero-cards">
+      <div class="float-chip stat-card glass" data-float>
         <div class="stat-top"><span class="stat-badge">+6% ↑</span> recent project</div>
         <div class="stat-value">47%</div>
         <div class="stat-foot">increase level</div>
       </div>
 
-      <div class="float-chip chart-card chip-2 glass" data-float>
+      <div class="float-chip chart-card glass" data-float>
         <div class="chart-top"><span>data system</span><span>26 resolved</span></div>
         <div class="chart-bars">
           <i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:40%"></i>
@@ -137,26 +132,24 @@
         </div>
       </div>
 
-      <div class="float-chip meeting-card chip-3 glass" data-float>
+      <div class="float-chip meeting-card glass" data-float>
         <div class="meeting-top"><span>meetings</span><span class="meeting-arrow">↗</span></div>
         <div class="meeting-title">Onboarding<br />agent sync</div>
         <div class="meeting-date">Jul 2026</div>
       </div>
 
-      <div class="float-chip stat-card chip-4 glass" data-float>
+      <div class="float-chip stat-card glass" data-float>
         <div class="stat-top"><span class="stat-badge">+3% ↑</span> recent project</div>
         <div class="stat-value">25%</div>
         <div class="stat-foot">increase level</div>
       </div>
 
+    </div>
+
       <div class="audio-pill pill-left glass" data-float><span class="play-tri">▶</span><span class="audio-wave"><i></i><i></i><i></i><i></i></span></div>
       <div class="audio-pill pill-right glass" data-float><span class="play-tri">▶</span><span class="audio-wave"><i></i><i></i><i></i><i></i></span></div>
 
-      <div class="scroll-cue" data-reveal>
-        <span>Scroll</span>
-        <div class="scroll-line"><i></i></div>
-      </div>
-    </div>
+    
   </section>
 
   <!-- ============ TRUSTED BY (marquee) ============ -->
@@ -172,36 +165,7 @@
     </div>
   </section>
 
-  <!-- ============ TRUSTED BY — puzzle cards ============ -->
-  <section class="puzzle-section" id="trusted">
-    <div class="container">
-      <span class="section-label" data-reveal>Why teams plug us in</span>
-      <h2 class="section-title" data-reveal>One piece fits every stack</h2>
-
-      <div class="puzzle-row">
-        <div class="puzzle-piece glass pp-1" data-reveal>
-          <span class="pp-icon">🔗</span>
-          <h3>Seamless Integrations</h3>
-          <p>Connects natively to 200+ tools — CRMs, ad platforms, inboxes, and more.</p>
-        </div>
-        <div class="puzzle-piece glass pp-2" data-reveal>
-          <span class="pp-icon">🛡️</span>
-          <h3>Enterprise‑Grade Security</h3>
-          <p>SOC 2 aligned infrastructure with full audit trails on every agent action.</p>
-        </div>
-        <div class="puzzle-piece glass pp-3" data-reveal>
-          <span class="pp-icon">🎯</span>
-          <h3>Custom Workflows</h3>
-          <p>Agents trained on your SOPs, not generic scripts — built around how you work.</p>
-        </div>
-        <div class="puzzle-piece glass pp-4" data-reveal>
-          <span class="pp-icon">🤝</span>
-          <h3>Dedicated Support</h3>
-          <p>A human strategist on call, backed by agents that never clock out.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ============ PROBLEM ============ -->
   <section class="problem" id="problem">
@@ -429,7 +393,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="hero3d.js"></script>
+
 <script src="script.js"></script>
 </body>
 </html>
